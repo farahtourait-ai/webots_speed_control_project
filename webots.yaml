@@ -1,6 +1,0 @@
-type: simulation
-version: "2023a"
-worlds:
-  - worlds/arena_speed_control.wbt
-controllers:
-  speed_control: controllers/speed_control.py
