@@ -1,2 +1,4 @@
 publish: true
 type: demo
+controllers:
+  speed_control: controllers/speed_control.py
