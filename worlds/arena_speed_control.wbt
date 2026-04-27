@@ -1,229 +1,155 @@
 #VRML_SIM R2025a utf8
 
 WorldInfo {
-  title "Speed Control Arena"
-}
-Viewpoint {
-  orientation -0.23 -0.01 0.97 3.24
-  position 2.7 0.1 1.6
+  title "Speed Control Arena - FINAL CLEAN"
 }
 
-# Simple Floor
+Viewpoint {
+  orientation 1 0 0 -1.25
+  position 0 4.5 4
+  fieldOfView 0.8
+}
+
+Background {
+  skyColor [0.7 0.75 0.8]
+}
+
+# ================= FLOOR (LIGHT WOOD COLOR - NO TEXTURE) =================
 Solid {
   translation 0 0 -0.05
   children [
     Shape {
-      geometry Box { size 4 4 0.05 }
-      appearance PBRAppearance { baseColor 0.8 0.8 0.8 roughness 0.8 }
+      geometry Box { size 6 6 0.05 }
+      appearance PBRAppearance {
+        baseColor 0.72 0.52 0.30
+        roughness 0.5
+      }
     }
   ]
-  boundingObject Box { size 4 4 0.05 }
-  name "floor"
-}
-
-# Wall - Bottom
-Solid {
-  translation 0 -2 0.1
-  children [
-    Shape {
-      geometry Box { size 4 0.1 0.2 }
-      appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
-    }
-  ]
-  boundingObject Box { size 4 0.1 0.2 }
+  boundingObject Box { size 6 6 0.05 }
   physics NULL
-  name "wall_bottom"
 }
 
-# Wall - Top
+# ================= WALLS =================
+DEF WALL_APP PBRAppearance { baseColor 0.2 0.2 0.25 }
+
 Solid {
-  translation 0 2 0.1
-  children [
-    Shape {
-      geometry Box { size 4 0.1 0.2 }
-      appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
-    }
-  ]
-  boundingObject Box { size 4 0.1 0.2 }
-  physics NULL
-  name "wall_top"
+  translation 0 -2.9 0.2
+  children [ Shape { geometry Box { size 6 0.1 0.4 } appearance USE WALL_APP } ]
+  boundingObject Box { size 6 0.1 0.4 }
 }
 
-# Wall - Left
 Solid {
-  translation -2 0 0.1
-  children [
-    Shape {
-      geometry Box { size 0.1 4 0.2 }
-      appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.1 4 0.2 }
-  physics NULL
-  name "wall_left"
+  translation 0 2.9 0.2
+  children [ Shape { geometry Box { size 6 0.1 0.4 } appearance USE WALL_APP } ]
+  boundingObject Box { size 6 0.1 0.4 }
 }
 
-# Wall - Right
 Solid {
-  translation 2 0 0.1
-  children [
-    Shape {
-      geometry Box { size 0.1 4 0.2 }
-      appearance PBRAppearance { baseColor 0.5 0.5 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.1 4 0.2 }
-  physics NULL
-  name "wall_right"
+  translation -2.9 0 0.2
+  children [ Shape { geometry Box { size 0.1 6 0.4 } appearance USE WALL_APP } ]
+  boundingObject Box { size 0.1 6 0.4 }
 }
 
-# Obstacle 1 - RED (in front of robot at 0.6m)
 Solid {
-  translation 0.6 0 0.05
-  children [
-    Shape {
-      geometry Box { size 0.15 0.15 0.1 }
-      appearance PBRAppearance { baseColor 1 0 0 roughness 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.15 0.15 0.1 }
-  physics NULL
-  name "obstacle_red"
+  translation 2.9 0 0.2
+  children [ Shape { geometry Box { size 0.1 6 0.4 } appearance USE WALL_APP } ]
+  boundingObject Box { size 0.1 6 0.4 }
 }
 
-# Obstacle 2 - GREEN (right side)
+# ================= LIGHT =================
+DirectionalLight {
+  direction 0.5 -1 -0.3
+  intensity 0.9
+}
+
+# ================= OBSTACLES =================
+DEF OBS_APP PBRAppearance { baseColor 0.15 0.15 0.18 }
+
 Solid {
-  translation 0.8 -0.8 0.05
-  children [
-    Shape {
-      geometry Box { size 0.12 0.12 0.1 }
-      appearance PBRAppearance { baseColor 0 1 0 roughness 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.12 0.12 0.1 }
-  physics NULL
-  name "obstacle_green"
+  translation 1.2 0 0.08
+  children [ Shape { geometry Box { size 0.25 0.25 0.16 } appearance USE OBS_APP } ]
+  boundingObject Box { size 0.25 0.25 0.16 }
 }
 
-# Obstacle 3 - BLUE (left side)
 Solid {
-  translation -0.8 0.5 0.05
-  children [
-    Shape {
-      geometry Box { size 0.12 0.12 0.1 }
-      appearance PBRAppearance { baseColor 0 0 1 roughness 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.12 0.12 0.1 }
-  physics NULL
-  name "obstacle_blue"
+  translation -1.3 1.3 0.08
+  children [ Shape { geometry Box { size 0.22 0.22 0.16 } appearance USE OBS_APP } ]
+  boundingObject Box { size 0.22 0.22 0.16 }
 }
 
-# Obstacle 4 - YELLOW (far back)
 Solid {
-  translation -0.5 -0.9 0.05
-  children [
-    Shape {
-      geometry Box { size 0.12 0.12 0.1 }
-      appearance PBRAppearance { baseColor 1 1 0 roughness 0.5 }
-    }
-  ]
-  boundingObject Box { size 0.12 0.12 0.1 }
-  physics NULL
-  name "obstacle_yellow"
+  translation 1.5 -1.3 0.08
+  children [ Shape { geometry Cylinder { radius 0.13 height 0.16 } appearance USE OBS_APP } ]
+  boundingObject Cylinder { radius 0.13 height 0.16 }
 }
 
-# ROBOT
-DEF ROBOT1 Robot {
+Solid {
+  translation -1.2 -1.2 0.08
+  children [ Shape { geometry Cylinder { radius 0.12 height 0.16 } appearance USE OBS_APP } ]
+  boundingObject Cylinder { radius 0.12 height 0.16 }
+}
+
+Solid {
+  translation 1.3 1.2 0.08
+  children [ Shape { geometry Box { size 0.2 0.2 0.14 } appearance USE OBS_APP } ]
+  boundingObject Box { size 0.2 0.2 0.14 }
+}
+
+# ================= ROBOT =================
+Robot {
   translation 0 0 0
-  rotation 0 0 -1 0
   children [
-    # Main Body
-    DEF MAIN_BODY Pose {
-      translation 0 0 0.0415
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 0.1 0.3 0.8
-            roughness 0.5
-          }
-          geometry Cylinder { height 0.08 radius 0.045 }
-        }
-      ]
+
+    # Body
+    Shape {
+      appearance PBRAppearance { baseColor 0.95 0.95 0.95 }
+      geometry Cylinder { height 0.08 radius 0.09 }
     }
-    
-    # Left Wheel Joint
+
+    # Left Wheel
     HingeJoint {
-      jointParameters HingeJointParameters {
-        axis 0 1 0
-        anchor 0 0.045 0.025
-      }
-      device [
-        RotationalMotor { name "left wheel motor" }
-      ]
+      jointParameters HingeJointParameters { axis 0 1 0 anchor 0 0.09 0.04 }
+      device [ RotationalMotor { name "left wheel motor" } ]
       endPoint Solid {
-        translation 0 0.045 0.025
-        name "left_wheel_solid"
+        translation 0 0.09 0.04
         children [
-          DEF LEFT_WHEEL Shape {
-            appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
-            geometry Cylinder { height 0.01 radius 0.025 }
+          Shape {
+            appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+            geometry Cylinder { height 0.02 radius 0.035 }
           }
         ]
-        boundingObject Cylinder { height 0.01 radius 0.025 }
-        physics Physics { density -1 mass 0.05 }
+        boundingObject Cylinder { height 0.02 radius 0.035 }
+        physics Physics { mass 0.05 }
       }
     }
-    
-    # Right Wheel Joint
+
+    # Right Wheel
     HingeJoint {
-      jointParameters HingeJointParameters {
-        axis 0 1 0
-        anchor 0 -0.045 0.025
-      }
-      device [
-        RotationalMotor { name "right wheel motor" }
-      ]
+      jointParameters HingeJointParameters { axis 0 1 0 anchor 0 -0.09 0.04 }
+      device [ RotationalMotor { name "right wheel motor" } ]
       endPoint Solid {
-        translation 0 -0.045 0.025
-        name "right_wheel_solid"
+        translation 0 -0.09 0.04
         children [
-          DEF RIGHT_WHEEL Shape {
-            appearance PBRAppearance { baseColor 0.2 0.2 0.2 }
-            geometry Cylinder { height 0.01 radius 0.025 }
+          Shape {
+            appearance PBRAppearance { baseColor 0.1 0.1 0.1 }
+            geometry Cylinder { height 0.02 radius 0.035 }
           }
         ]
-        boundingObject Cylinder { height 0.01 radius 0.025 }
-        physics Physics { density -1 mass 0.05 }
+        boundingObject Cylinder { height 0.02 radius 0.035 }
+        physics Physics { mass 0.05 }
       }
     }
-    
-    # Front Distance Sensor
+
+    # Distance Sensor
     DistanceSensor {
-      translation 0.05 0 0.045
-      rotation 0 0 1 0
+      translation 0.1 0 0.08
       name "ds_front"
-      lookupTable [0 0 0, 0.5 500 0, 1.0 1000 0]
-    }
-    
-    # Left Distance Sensor
-    DistanceSensor {
-      translation 0 0.05 0.045
-      rotation 0 0 1 0.5
-      name "ds_left"
-      lookupTable [0 0 0, 0.5 500 0, 1.0 1000 0]
-    }
-    
-    # Right Distance Sensor
-    DistanceSensor {
-      translation 0 -0.05 0.045
-      rotation 0 0 1 -0.5
-      name "ds_right"
-      lookupTable [0 0 0, 0.5 500 0, 1.0 1000 0]
+      lookupTable [0 0 0, 0.5 500 0, 1 1000 0]
     }
   ]
-  name "robot1"
+
   controller "speed_control"
-  boundingObject Cylinder { height 0.08 radius 0.045 }
-  physics Physics { density -1 mass 0.5 }
+  boundingObject Cylinder { height 0.08 radius 0.09 }
+  physics Physics { mass 0.6 }
 }
